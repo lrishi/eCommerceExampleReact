@@ -23,7 +23,7 @@ export const removeItemFromCart = (totalItemCount, cartItems, cartItemToRemove) 
             cartItem => (cartItem.id === cartItemToRemove.id) ? { ...cartItem, quantity: cartItem.quantity - 1 }
                 : cartItem
         );
-        newCartItems = newCartItems.filter(cartItem => cartItem.quantity != 0)
+        newCartItems = newCartItems.filter(cartItem => cartItem.quantity !== 0)
         return { totalItemCount: totalItemCount, cartItems: newCartItems };
     }
     return {
@@ -36,7 +36,7 @@ export const clearItemFromCart = (totalItemCount, cartItems, cartItemToRemove) =
     if (existingCartItem) {
         totalItemCount -= (cartItemToRemove.quantity);
         const newCartItems = cartItems.filter(
-            cartItem => (cartItem.id != cartItemToRemove.id)
+            cartItem => (cartItem.id !== cartItemToRemove.id)
         );
         return { totalItemCount: totalItemCount, cartItems: newCartItems };
     }
