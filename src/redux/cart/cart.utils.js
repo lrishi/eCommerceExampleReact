@@ -1,12 +1,16 @@
 
 
-export const addItemToCart = (cartItems, cartItemToAdd) => {
-    const existingCartItem = cartItems.find(cartItem => cartItem.id == cartItemToAdd.id);
+export const addItemToCart = (totalItemCount, cartItems, cartItemToAdd) => {
+    const existingCartItem = cartItems.find(cartItem => cartItem.id === cartItemToAdd.id);
+    totalItemCount++;
     if (existingCartItem) {
-        return cartItems.map(
-            cartItem => (cartItem.id == cartItemToAdd.id) ? { ...cartItem, quantity: cartItem.quantity + 1 }
+        const newCartItems = cartItems.map(
+            cartItem => (cartItem.id === cartItemToAdd.id) ? { ...cartItem, quantity: cartItem.quantity + 1 }
                 : cartItem
         );
+        return { totalItemCount: totalItemCount, cartItems: newCartItems };
     }
-    return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+    return {
+        totalItemCount, cartItems: [...cartItems, { ...cartItemToAdd, quantity: 1 }]
+    };
 }
